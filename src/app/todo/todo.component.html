@@ -23,13 +23,8 @@
 
   <mat-card id="card">
     <mat-list>
-      <mat-list-item *ngFor="let todo of todos">
-        <mat-checkbox
-          (change)="checkUnchekTodo(todo._id)"
-          [checked]="todo.isDone"
-        >
-          {{ todo.title }}
-        </mat-checkbox>
+      <mat-list-item *ngFor="let todo of todos ">
+        <app-todo-child (fetchRequest)='getTodos()' [todo]='todo'></app-todo-child>
       </mat-list-item>
     </mat-list>
   </mat-card>

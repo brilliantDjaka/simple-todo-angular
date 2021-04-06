@@ -16,9 +16,10 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatListModule} from '@angular/material/list';
 import { FormsModule }   from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { TodoChildComponent } from './todo-child/todo-child.component';
 
 @NgModule({
-  declarations: [AppComponent, TodoComponent],
+  declarations: [AppComponent, TodoComponent, TodoChildComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
