@@ -1,0 +1,44 @@
+<span class="container">
+  <form (ngSubmit)="addTodo(todoInput.value); todoInput.value=''" class="form" style="width: 100%">
+    <mat-form-field style="width: 25%; margin-right: 2%">
+      <mat-label>Add Todo</mat-label>
+      <input
+        type="text"
+        autocomplete="off"
+        matInput
+        placeholder="Buy me a coffe"
+        #todoInput
+    
+      />
+    </mat-form-field>
+    <button
+      type="button"
+      (click)="addTodo(todoInput.value); todoInput.value=''"
+      mat-raised-button
+      color="primary"
+    >
+      Add
+    </button>
+  </form>
+
+  <mat-card id="card">
+    <mat-list>
+      <mat-list-item *ngFor="let todo of todos">
+        <mat-checkbox
+          (change)="checkUnchekTodo(todo._id)"
+          [checked]="todo.isDone"
+        >
+          {{ todo.title }}
+        </mat-checkbox>
+      </mat-list-item>
+    </mat-list>
+  </mat-card>
+  <button
+    (click)="removeComplete()"
+    class="remove-completed"
+    mat-button
+    color="primary"
+  >
+    Remove Completed
+  </button>
+</span>

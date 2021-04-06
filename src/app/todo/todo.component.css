@@ -1,0 +1,23 @@
+* {
+  color: whitesmoke;
+}
+
+#card {
+  display: table;
+  margin: 0 auto;
+  min-height: 300px;
+  min-width: 30%;
+  padding: 30px;
+}
+
+.container {
+  text-align: center;
+  width: 100%;
+  display: table;
+  margin: 0 auto;
+}
+
+.remove-completed {
+  margin-top: 20px;
+  width: 34%;
+}
