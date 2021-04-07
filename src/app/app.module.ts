@@ -12,11 +12,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatListModule} from '@angular/material/list';
-import { FormsModule }   from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatListModule } from '@angular/material/list';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TodoChildComponent } from './todo-child/todo-child.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [AppComponent, TodoComponent, TodoChildComponent],
@@ -34,7 +35,8 @@ import { TodoChildComponent } from './todo-child/todo-child.component';
     MatCheckboxModule,
     MatListModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

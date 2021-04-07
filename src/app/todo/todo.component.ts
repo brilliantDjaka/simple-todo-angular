@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Todo } from '../todo';
 import { TodoService } from '../todo.service';
 @Component({
@@ -8,7 +8,7 @@ import { TodoService } from '../todo.service';
   styleUrls: ['./todo.component.css'],
 })
 export class TodoComponent implements OnInit {
-  todos: Todo[] = [];
+  todos$?: Observable<Todo[]>;
 
   @Input()
   inputValue: any;
@@ -19,14 +19,14 @@ export class TodoComponent implements OnInit {
   }
 
   getTodos(): void {
-    this.todoService.getTodos().subscribe((todos) => (this.todos = todos));
+    this.todos$ = this.todoService.getTodos();
   }
   removeComplete(): void {
     this.todoService.removeCompleted().subscribe(() => this.getTodos());
   }
   addTodo(title: string): void {
-   this.todoService.addTodos(title).subscribe(()=>{
-     this.getTodos();
-   })
+    this.todoService.addTodos(title).subscribe(() => {
+      this.getTodos();
+    });
   }
 }

@@ -1,5 +1,9 @@
 <span class="container">
-  <form (ngSubmit)="addTodo(todoInput.value); todoInput.value=''" class="form" style="width: 100%">
+  <form
+    (ngSubmit)="addTodo(todoInput.value); todoInput.value = ''"
+    class="form"
+    style="width: 100%"
+  >
     <mat-form-field style="width: 25%; margin-right: 2%">
       <mat-label>Add Todo</mat-label>
       <input
@@ -8,12 +12,11 @@
         matInput
         placeholder="Buy me a coffe"
         #todoInput
-    
       />
     </mat-form-field>
     <button
       type="button"
-      (click)="addTodo(todoInput.value); todoInput.value=''"
+      (click)="addTodo(todoInput.value); todoInput.value = ''"
       mat-raised-button
       color="primary"
     >
@@ -22,11 +25,22 @@
   </form>
 
   <mat-card id="card">
-    <mat-list>
-      <mat-list-item *ngFor="let todo of todos ">
-        <app-todo-child (fetchRequest)='getTodos()' [todo]='todo'></app-todo-child>
-      </mat-list-item>
-    </mat-list>
+    <div *ngIf="todos$ | async; else loading">
+      <mat-list>
+        <mat-list-item *ngFor="let todo of todos$ | async">
+          <app-todo-child
+            (fetchRequest)="getTodos()"
+            [todo]="todo"
+          ></app-todo-child>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <ng-template #loading>
+      <mat-spinner
+        style="display: table; margin: 0 auto; margin-top: 25%"
+        diameter="50"
+      ></mat-spinner>
+    </ng-template>
   </mat-card>
   <button
     (click)="removeComplete()"
