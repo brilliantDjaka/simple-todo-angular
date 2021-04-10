@@ -14,6 +14,9 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if(localStorage.getItem('jwt')){
+      this.router.navigate(['/todo']);
+    }
     this.route.queryParams.subscribe((params) => {
       console.log(params )
       if (params['t']) {
