@@ -1,5 +1,6 @@
 <mat-toolbar color="primary">
   <span id="title">Simple Todo</span>
+  <button (click)='logout()' *ngIf='checkJwt()' mat-button >logout</button>
 </mat-toolbar>
 <div>
   <router-outlet></router-outlet>

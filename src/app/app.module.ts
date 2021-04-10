@@ -18,9 +18,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TodoChildComponent } from './todo-child/todo-child.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
-  declarations: [AppComponent, TodoComponent, TodoChildComponent],
+  declarations: [AppComponent, TodoComponent, TodoChildComponent, LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

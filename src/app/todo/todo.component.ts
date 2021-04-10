@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AuthService } from '../auth.service';
 import { Todo } from '../todo';
 import { TodoService } from '../todo.service';
 @Component({
@@ -12,9 +13,10 @@ export class TodoComponent implements OnInit {
 
   @Input()
   inputValue: any;
-  constructor(private todoService: TodoService) {}
+  constructor(private todoService: TodoService,private authService: AuthService) {}
 
   ngOnInit(): void {
+    this.authService.redirectIfJWTNotExist()
     this.getTodos();
   }
 
