@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/todo']);
     }
     this.route.queryParams.subscribe((params) => {
-      console.log(params )
       if (params['t']) {
         localStorage.setItem('jwt', atob(params['t']));
         this.router.navigate(['/todo']);
