@@ -34,9 +34,9 @@ export class TodoService {
       .delete<Todo[]>(this.baseUrl + '/todos', this.httpOptions)
       .pipe(catchError((error: HttpErrorResponse)=>this.handleError(error,this.authService)));
   }
-  addTodos(title: string): Observable<Todo[]> {
+  addTodos(title: string): Observable<Todo> {
     return this.http
-      .post<Todo[]>(this.baseUrl + '/todos', { title }, this.httpOptions)
+      .post<Todo>(this.baseUrl + '/todos', { title }, this.httpOptions)
       .pipe(catchError((error: HttpErrorResponse)=>this.handleError(error,this.authService)));
   }
   checkUncheck(id: string, isDone: boolean): Observable<Todo[]> {

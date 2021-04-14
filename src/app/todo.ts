@@ -3,4 +3,5 @@ export interface Todo {
     title: string;
     isDone: boolean;
     description:string;
+    isPending:boolean;
   }

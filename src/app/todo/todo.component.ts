@@ -9,26 +9,56 @@ import { TodoService } from '../todo.service';
   styleUrls: ['./todo.component.css'],
 })
 export class TodoComponent implements OnInit {
-  todos$?: Observable<Todo[]>;
-
-  @Input()
+  todos: Array<Todo> = [];
+  isLoading: number = 0;
+  @Input() 
   inputValue: any;
-  constructor(private todoService: TodoService,private authService: AuthService) {}
+  constructor(
+    private todoService: TodoService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    this.authService.redirectIfJWTNotExist()
-    this.getTodos();
+    this.authService.redirectIfJWTNotExist();
+    this.isLoading++;
+    this.todoService.getTodos().subscribe((todos) => {
+      this.todos = todos;
+      this.isLoading--;
+    });
   }
 
   getTodos(): void {
-    this.todos$ = this.todoService.getTodos();
+    this.todoService.getTodos().subscribe((todos) => (this.todos = todos));
   }
   removeComplete(): void {
-    this.todoService.removeCompleted().subscribe(() => this.getTodos());
+    this.isLoading++;
+    this.todos = this.todos.reduce((hol,curr)=>(curr.isDone ? hol : [...hol,curr] ),[] as Todo[])
+    this.todoService
+      .removeCompleted()
+      .subscribe(() => this.isLoading--, ()=>this.getTodos());
+    
   }
   addTodo(title: string): void {
-    this.todoService.addTodos(title).subscribe(() => {
-      this.getTodos();
+    let index = this.todos?.length;
+    this.todos?.push({
+      _id: `${index}`,
+      title: title,
+      description: '',
+      isDone: false,
+      isPending: true,
     });
+    this.todoService.addTodos(title).subscribe((todo) => {
+      this.todos[index] = { ...todo, isPending: false };
+    }, ()=>this.getTodos());
+  }
+  checkUnchekTodo(id:string): void {
+    this.isLoading++;
+    let index = this.todos.findIndex((todo)=>todo._id == id)
+    this.todos[index].isDone = !this.todos[index].isDone
+    this.todoService
+      .checkUncheck(id,this.todos[index].isDone)
+      .subscribe(() => {
+        this.isLoading--;
+      },()=>this.getTodos());
   }
 }

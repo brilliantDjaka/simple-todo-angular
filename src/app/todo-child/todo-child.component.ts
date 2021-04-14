@@ -12,14 +12,8 @@ export class TodoChildComponent implements OnInit {
   constructor(private todoService: TodoService) {}
   @Input()
   todo!: Todo;
-  @Output() fetchRequest = new EventEmitter<void>();
+  @Output() checkUncheck = new EventEmitter<string>();
   ngOnInit(): void {}
-  checkUnchekTodo(): void {
-    this.todoService
-      .checkUncheck(this.todo._id, !this.todo.isDone)
-      .subscribe(() => {
-        this.fetchRequest.emit();
-      });
-  }
+  
   
 }
